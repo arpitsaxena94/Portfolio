@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arpit Saxena — Portfolio</title>
+<meta name="color-scheme" content="dark light" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===================== THEME ===================== */
+:root{
+  --bg:#0b1220; --bg-2:#0e172b;
+  --text:#e7f6f5; --muted:#9cc3c0;
+  --teal-1:#14b8a6; --teal-2:#22d3ee; /* accent */
+  --glass:rgba(255,255,255,.08); --glass-2:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.14);
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+  --radius:18px;
+}
+:root[data-theme="light"]{
+  --bg:#f6fbfb; --bg-2:#e9f7f6;
+  --text:#0a1a19; --muted:#3d6b68;
+  --glass:rgba(255,255,255,.72); --glass-2:rgba(255,255,255,.6);
+  --border:rgba(8,24,23,.08);
+  --shadow:0 18px 50px rgba(2,30,30,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+a{color:var(--teal-2);text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ===================== NAV ===================== */
+.nav{position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px) saturate(140%);
+  background:linear-gradient(180deg,rgba(7,15,26,.6),rgba(7,15,26,.15))}
+.nav-inner{max-width:1180px;margin:auto;padding:12px 20px;display:flex;gap:16px;align-items:center}
+.brand{font:800 18px/1 Poppins,Inter,system-ui;letter-spacing:.2px}
+.links{display:flex;gap:6px;flex:1}
+.link{position:relative;padding:10px 12px;border-radius:12px;color:var(--text);opacity:.9}
+.link:hover{opacity:1}
+.link::after{content:"";position:absolute;left:12px;right:12px;bottom:6px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--teal-1),var(--teal-2));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.link:hover::after{transform:scaleX(1)}
+.theme{border:1px solid var(--border);background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--text);cursor:pointer}
+
+/* ===================== PARALLAX SECTIONS ===================== */
+.para{position:relative;min-height:72vh;display:grid;place-items:center;overflow:hidden}
+.para::before{content:"";position:absolute;inset:-6%;background-position:center;background-size:cover;will-change:transform;filter:saturate(1.05) contrast(1.05)}
+/* layered animated teal gradient */
+.para::after{content:"";position:absolute;inset:-20%;
+  background:radial-gradient(60% 40% at 20% 20%, rgba(20,184,166,.18), transparent 60%),
+             radial-gradient(50% 50% at 80% 60%, rgba(34,211,238,.14), transparent 60%);
+  animation:float 16s ease-in-out infinite alternate;mix-blend-mode:screen;pointer-events:none}
+@keyframes float{to{transform:translate3d(0,-3%,0) scale(1.03)}}
+
+/* assign images (replace with yours) */
+.hero.para::before{background-image:
+  linear-gradient(180deg,rgba(3,10,18,.35),rgba(3,10,18,.8)), url('hero.jpg')}
+.skills-bg.para::before{background-image:
+  linear-gradient(180deg,rgba(3,10,18,.4),rgba(3,10,18,.85)), url('skills-bg.jpg')}
+.projects-bg.para::before{background-image:
+  linear-gradient(180deg,rgba(3,10,18,.45),rgba(3,10,18,.9)), url('projects-bg.jpg')}
+
+/* ===================== HERO ===================== */
+.wrap{max-width:1180px;margin:auto;padding:60px 20px}
+.hero-inner{position:relative;z-index:1;text-align:center;padding:64px 20px}
+.avatar-wrap{width:140px;height:140px;margin:0 auto 16px;border-radius:24px;padding:6px;
+  background:linear-gradient(135deg,var(--teal-1),var(--teal-2));
+  box-shadow:0 0 0 6px rgba(255,255,255,.15), var(--shadow)}
+.avatar{width:100%;height:100%;object-fit:cover;border-radius:18px;border:2px solid rgba(255,255,255,.8);background:#0003}
+.title{font:800 clamp(28px,5vw,64px)/1.05 Poppins,Inter;letter-spacing:.3px;margin:8px 0}
+.type{display:inline-block;min-height:1.2em;border-right:2px solid var(--teal-2);padding-right:6px;margin-top:6px}
+.sub{color:var(--muted);margin-top:6px}
+.cta{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{border:1px solid var(--border);background:var(--glass);color:var(--text);padding:10px 16px;border-radius:14px;font-weight:700;transition:transform .2s, box-shadow .2s, background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.btn.primary{border:none;background:linear-gradient(135deg,var(--teal-1),var(--teal-2));color:#05201e}
+
+/* ===================== SECTIONS & CARDS ===================== */
+.section-title{font:700 clamp(20px,3vw,32px)/1.2 Poppins,Inter;margin:0 0 16px}
+.grid{display:grid;gap:18px}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:960px){.cols-3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.cols-2,.cols-3{grid-template-columns:1fr}}
+
+.card{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);padding:18px;
+  backdrop-filter:blur(12px) saturate(130%);box-shadow:var(--shadow);opacity:0;transform:translateY(14px);
+  transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.card.show{opacity:1;transform:translateY(0)}
+
+.tag{display:inline-block;padding:6px 10px;margin:6px 6px 0 0;border-radius:999px;border:1px solid var(--border);background:var(--glass-2);font-size:13px}
+.when{color:var(--muted);font-size:14px;margin-top:4px}
+
+/* projects */
+.project{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit}
+.thumb{width:126px;height:90px;border-radius:14px;overflow:hidden;border:1px solid var(--border);flex-shrink:0;background:#0003}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.project:hover .thumb img{transform:scale(1.05)}
+.project .name{font-weight:800}
+.project:hover .name{color:var(--teal-2)}
+
+/* footer & fab */
+.footer{padding:36px 20px;text-align:center;color:var(--muted);border-top:1px solid var(--border);margin-top:40px}
+.fab{position:fixed;right:16px;bottom:16px;border:none;border-radius:999px;padding:12px 14px;cursor:pointer;
+  background:linear-gradient(135deg,var(--teal-1),var(--teal-2));color:#05201e;font-weight:800;box-shadow:var(--shadow)}
+
+/* mobile parallax fallback */
+@media (max-width:800px){ .para::before{background-attachment:scroll} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">Arpit Saxena</div>
+    <div class="links">
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#skills">Skills</a>
+      <a class="link" href="#experience">Experience</a>
+      <a class="link" href="#projects">Projects</a>
+      <a class="link" href="#education">Education</a>
+    </div>
+    <button class="theme" id="themeBtn" aria-label="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="para hero">
+  <div class="hero-inner">
+    <div class="avatar-wrap"><img class="avatar" src="profile.jpeg" alt="Arpit Saxena"></div>
+    <div class="title">Arpit Saxena</div>
+    <div class="type" id="typeTarget"></div>
+    <div class="sub">📍 Delhi • <a href="mailto:sarpit.94@gmail.com">sarpit.94@gmail.com</a> • +91 81788 12394</div>
+    <div class="cta">
+      <a class="btn primary" href="ArpitResume.pdf" download>📄 Download Resume</a>
+      <a class="btn" href="#projects">View Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT (soft parallax) -->
+<section class="para skills-bg" id="about">
+  <div class="wrap">
+    <div class="card show">
+      <h2 class="section-title">Objective</h2>
+      <p class="muted">
+        To seek a motivating and challenging position in the software industry and be part of a creative team
+        where I can utilize my technical skills to contribute to organizational growth and enhance my personal development.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="wrap" id="skills">
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="grid cols-2">
+    <div class="card"><h3>Languages</h3>
+      <span class="tag">Java</span><span class="tag">PHP</span><span class="tag">C++</span>
+    </div>
+    <div class="card"><h3>Backend Frameworks</h3>
+      <span class="tag">Spring Boot</span><span class="tag">Spring MVC</span>
+      <span class="tag">Hibernate</span><span class="tag">Struts 2.5.26</span><span class="tag">Tiles 3.0</span>
+    </div>
+    <div class="card"><h3>Frontend</h3>
+      <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span>
+      <span class="tag">JavaScript</span><span class="tag">jQuery</span>
+    </div>
+    <div class="card"><h3>Databases</h3>
+      <span class="tag">SQL Server</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
+    </div>
+    <div class="card"><h3>Tools & Platforms</h3>
+      <span class="tag">Eclipse</span><span class="tag">Oracle SQL Developer</span><span class="tag">MySQL Workbench</span>
+      <span class="tag">GitHub</span><span class="tag">SVN</span><span class="tag">PHPStorm</span>
+    </div>
+    <div class="card"><h3>APIs</h3>
+      <span class="tag">NSWS</span><span class="tag">Parivesh</span><span class="tag">RESTful APIs</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="wrap" id="experience">
+  <h2 class="section-title">Work Experience</h2>
+  <div class="grid">
+    <div class="card">
+      <div><strong>Senior Developer</strong> — Samarth E-GOV, IIC Lab, University of Delhi</div>
+      <div class="when">Oct 2024 – Present</div>
+      <ul><li>Leading backend development and workflow automation for MoE-sponsored Samarth EGov.</li></ul>
+    </div>
+    <div class="card">
+      <div><strong>Java Developer</strong> — NIC – IVFRT Office, Ministry of Home Affairs</div>
+      <div class="when">Jul 2023 – Sep 2024</div>
+      <ul><li>Built IVFRT Dashboard: passenger verification & flight tracking modules.</li></ul>
+    </div>
+    <div class="card">
+      <div><strong>Java Developer</strong> — SilverTouch Technologies Ltd.</div>
+      <div class="when">Dec 2020 – Jun 2023</div>
+      <ul><li>Coal Clearance Portal, ASI Portal, ShramSuvidha; backend + UI + REST integration.</li></ul>
+    </div>
+    <div class="card">
+      <div><strong>Developer</strong> — SISL Ltd.</div>
+      <div class="when">Aug 2017 – Oct 2020</div>
+      <ul><li>SISL Relation Management System; Vedanta Cairn Weather App.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS (parallax background) -->
+<section class="para projects-bg" id="projects">
+  <div class="wrap">
+    <h2 class="section-title">Key Projects</h2>
+    <div class="grid cols-3">
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project1.jpg" alt="Samarth EGOV"></div>
+        <div><div class="name">Samarth EGOV</div><div class="muted">Governance automation in universities</div></div>
+      </a>
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project2.jpg" alt="IVFRT Dashboard"></div>
+        <div><div class="name">IVFRT Dashboard</div><div class="muted">Immigration Control System</div></div>
+      </a>
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project3.jpg" alt="Coal Clearance Portal"></div>
+        <div><div class="name">Coal Clearance Portal</div><div class="muted">Unified coal clearance</div></div>
+      </a>
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project4.jpg" alt="ASI Portal"></div>
+        <div><div class="name">ASI Portal</div><div class="muted">Digital archaeological records</div></div>
+      </a>
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project5.jpg" alt="Vedanta Weather App"></div>
+        <div><div class="name">Vedanta Cairn Weather App</div><div class="muted">Real-time weather monitoring</div></div>
+      </a>
+      <a href="#" class="card project">
+        <div class="thumb"><img src="project6.jpg" alt="SISL RMS"></div>
+        <div><div class="name">SISL Relation Mgmt System</div><div class="muted">Employee/dashboard management</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION / LANG / HOBBIES -->
+<section class="wrap" id="education">
+  <h2 class="section-title">Education</h2>
+  <div class="grid cols-2">
+    <div class="card"><strong>B.Tech — Electronics & Communication</strong><div class="muted">AKGEC, Ghaziabad • 2013–2017</div></div>
+    <div class="card"><strong>Intermediate (PCM)</strong><div class="muted">Mahatma Hansraj Modern School, Jhansi • 2011–2013</div></div>
+    <div class="card"><strong>High School (Mathematics)</strong><div class="muted">Christ The King College, Jhansi • 2010–2011</div></div>
+  </div>
+
+  <h2 class="section-title" style="margin-top:28px">Languages</h2>
+  <div class="card">English — Full Professional • Hindi — Full Professional</div>
+
+  <h2 class="section-title" style="margin-top:28px">Hobbies & Interests</h2>
+  <div class="card">Learning new technologies • Internet surfing • Robotics & Embedded Systems</div>
+</section>
+
+<footer class="footer">© 2025 Arpit Saxena • Delhi</footer>
+<button class="fab" id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+/* ===== Theme toggle (persist) ===== */
+const root=document.documentElement, themeBtn=document.getElementById('themeBtn');
+const saved=localStorage.getItem('theme'); if(saved) root.setAttribute('data-theme',saved);
+themeBtn.textContent=(root.getAttribute('data-theme')==='light')?'🌙':'☀️';
+themeBtn.addEventListener('click',()=>{
+  const next=root.getAttribute('data-theme')==='light'?'dark':'light';
+  root.setAttribute('data-theme',next); localStorage.setItem('theme',next);
+  themeBtn.textContent=(next==='light')?'🌙':'☀️';
+});
+
+/* ===== In-view reveal ===== */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('show'); obs.unobserve(e.target);} }),{threshold:.2});
+document.querySelectorAll('.card').forEach(el=>obs.observe(el));
+
+/* ===== Back to top ===== */
+document.getElementById('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ===== Multi-layer parallax (GPU-friendly) ===== */
+const paras=document.querySelectorAll('.para');
+let lastY=0; function tick(){
+  const y=window.scrollY||window.pageYOffset; if(Math.abs(y-lastY)<1){return requestAnimationFrame(tick)}
+  paras.forEach((sec,i)=>{
+    const speed=.18+(i%3)*.06;
+    sec.style.setProperty('--t',`translate3d(0,${-y*speed*.12}px,0)`);
+    sec.style.cssText += `--t: translate3d(0, ${-y*speed*.12}px, 0);`;
+  });
+  requestAnimationFrame(tick); lastY=y;
+}
+const style=document.createElement('style'); style.innerHTML=`.para::before{transform:var(--t,translate3d(0,0,0))}`;
+document.head.appendChild(style); requestAnimationFrame(tick);
+
+/* ===== Typewriter headline ===== */
+const roles=["Senior Developer","Java • Spring Boot","REST APIs • SQL • DevOps-lite"];
+const tgt=document.getElementById('typeTarget'); let i=0, j=0, del=false;
+function type(){
+  const word=roles[i];
+  tgt.textContent=word.slice(0,j);
+  j += del?-1:1;
+  if(!del && j===word.length){ del=true; setTimeout(type,950); return; }
+  if(del && j===0){ del=false; i=(i+1)%roles.length; }
+  setTimeout(type, del?40:70);
+}
+type();
+</script>
+</body>
+</html>
